@@ -1,0 +1,31 @@
+body {
+    cursor: default;
+}
+
+header div {
+    text-align: center;
+}
+
+.bdr {
+    border: 2px dotted red;
+}
+
+.searchHist {
+    background-color: cyan;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.searchHist:hover {
+    color: white;
+    cursor: pointer;
+}
+
+#dayOfBox {
+    height: 270px
+}
+
+
+.foreDay {
+    height: 200px;
+}
