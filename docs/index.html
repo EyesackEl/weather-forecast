@@ -17,7 +17,7 @@
      rel="stylesheet" 
      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
     >
-    <!-- Css File -->
+    <!-- Local CSS -->
     <link
      href = './style/style.css'
      rel = 'stylesheet'
@@ -42,12 +42,9 @@
                 <button type="submit" class="btn btn-success col-12">Get Weather!</button>
             </form>
                     <!-- Search History -->
-            <div id="searchHistBox" class='d-grid gap-2 bdr'>
+            <div id="searchHistBox" class=' bdr'>
                 <h6>Search History: </h6>
-                <div class="col-12">
-                    <div class="searchHist">
-                    <strong>Aberdeen</strong>
-                    </div>
+                <div class="col-12" id="histList">
                 </div>
             </div>
         </div>
@@ -55,7 +52,8 @@
 
         <!-- Day-Of Box -->
         <div id='dayOfBox'class="container col-sm-8 bdr">
-            <h3><strong id="dayOfCity">City Name</strong></h3>
+            <h3><strong id="dayOfCity"></strong><img id = 'dayOfIcon'></h3>
+            <h5 id="currentDay"></h5>
             <br>
             <h6 id="dayOfTemp">Temperature: </h6>
             <br>
@@ -63,33 +61,27 @@
             <br>
             <h6 id="dayOfHumid">Humidity: </h6>
             <br>
-            <h6 id="dayOfUv">UV Index: </h6>
+            <h6 id="dayOfUv" >UV Index: </h6>
             <br>
         </div>
     </div>
 
         <!-- Forecast Box -->
     <h3>5 Day Forecast:</h3>
-    <div id = 'foreBox' class = 'container-fluid px-3'>
-        <div class = 'row gx-3'>
-            <div class = 'col'>
-                <div class = 'foreDay bdr'>Test</div>
-            </div>
-            <div class = 'col'>
-                <div class = 'foreDay bdr'>Test</div>
-            </div>
-            <div class = 'col'>
-                <div class = 'foreDay bdr'>Test</div>
-            </div>
-            <div class = 'col'>
-                <div class = 'foreDay bdr'>Test</div>
-            </div>
-            <div class = 'col'>
-                <div class = 'foreDay bdr'>Test</div>
-            </div>
+    <div id='foreBox' class='container-fluid px-3'>
+        <div class='row gx-3' id='foreRow'>
+       <!-- <div class = 'col'>
+                <div class = 'foreDay bdr'>
+                    <h5>Date: </h5>
+                    <img src = http://openweathermap.org/img/wn/02d.png>
+                    <p>Temp: </p>
+                    <p>Wind: </p>
+                    <p>Humidity: </p>
+                </div>
+            </div> -->
         </div>
     </div>
-
+        
     <!-- Moment -->
     <script
      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
@@ -111,7 +103,7 @@
      referrerpolicy="no-referrer">
     </script>
 
-    <!-- JavaScript File -->
+    <!-- Local JavaScript -->
     <script
      src = './script/script.js'>
     </script>

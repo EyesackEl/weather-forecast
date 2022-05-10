@@ -11,6 +11,7 @@ header div {
 }
 
 .searchHist {
+    margin-bottom: 5px;
     background-color: cyan;
     text-align: center;
     border-radius: 20px;
@@ -22,9 +23,12 @@ header div {
 }
 
 #dayOfBox {
-    height: 270px
+    height: 295px;
 }
 
+#dayOfUv {
+    width: fit-content;
+}
 
 .foreDay {
     height: 200px;
