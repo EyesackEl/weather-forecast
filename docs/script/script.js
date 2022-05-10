@@ -86,7 +86,7 @@ function getWeather(cityLon, cityLat) {
 }
 
 function getLocation(searchCity) {
-    var geoQueryUrl = 'http://api.openweathermap.org/geo/1.0/direct'
+    var geoQueryUrl = 'https://api.openweathermap.org/geo/1.0/direct'
     var geoQueryUrl = geoQueryUrl + '?q=' + searchCity + '&appid=836b3a2ed43f3d15d6aeaefa85257ac2';
     fetch(geoQueryUrl)
         .then(function(response) {
