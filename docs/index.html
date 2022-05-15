@@ -17,6 +17,20 @@
      rel="stylesheet" 
      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
     >
+    <!-- Google Fonts -->
+    <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+    >
+    <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+    >
+    <link
+    href="https://fonts.googleapis.com/css2?family=Expletus+Sans&family=Roboto+Slab&family=Water+Brush&display=swap"
+    rel="stylesheet"
+    >
     <!-- Local CSS -->
     <link
      href = './style/style.css'
@@ -32,25 +46,27 @@
         </div>
     </header>
 
-    <div class = 'row'>
+    <div class = 'container-fluid row g-2'>
         <!-- Search Box -->
-        <div id="searchBox" class='container col-sm-4 bdr'>
-            <form id="searchForm" class = 'text-center'>
-                <label for='cityInput'><h4>Search by City Name:</h4></label>
-                <input type='text' class="form-control col-sm-3" id="cityInput">
-                <button type="submit" class="btn btn-success col-12">Get Weather!</button>
-            </form>
-                    <!-- Search History -->
-            <div id="searchHistBox" class=' bdr'>
-                <h6>Search History: </h6>
-                <div class="col-12" id="histList">
+        <div id="searchBox" class='col-4'>
+            <div class='bdr'>
+                <form id="searchForm" class = 'text-center'>
+                    <label for='cityInput'><h4>Search by City Name:</h4></label>
+                    <input type='text' class="form-control col-sm-3" id="cityInput">
+                    <button type="submit" class="btn btn-success col-12">Get Weather!</button>
+                </form>
+                        <!-- Search History -->
+                <div id="searchHistBox">
+                    <h6>History:</h6>
+                    <div class="col-12" id="histList">
+                    </div>
                 </div>
             </div>
         </div>
 
 
         <!-- Day-Of Box -->
-        <div id='dayOfBox'class="container col-sm-8 bdr">
+        <div id='dayOfBox'class="container col-8 bdr">
             <h3><strong id="dayOfCity"></strong><img id = 'dayOfIcon'></h3>
             <h5 id="currentDay"></h5>
             <br>
@@ -70,12 +86,12 @@
     <div id='foreBox' class='container-fluid px-3'>
         <div class='row gx-3' id='foreRow'>
        <!-- <div class = 'col'>
-                <div class = 'foreDay bdr'>
-                    <h5>Date: </h5>
+                <div class = 'foreday forecast-bdr px-2'>
+                    <h5>Date</h5>
                     <img src = http://openweathermap.org/img/wn/02d.png>
-                    <p>Temp: </p>
-                    <p>Wind: </p>
-                    <p>Humidity: </p>
+                    <p>Temp</p>
+                    <p>Wind</p>
+                    <p>Humidity</p>
                 </div>
             </div> -->
         </div>

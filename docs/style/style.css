@@ -1,23 +1,32 @@
 :root {
+    --main: #4d84a5;
+    --border: #062463;
     --searchHist: #105965;
 }
 
 body {
+    font-family: 'Roboto Slab', serif;
     cursor: default;
+    background-color: var(--main);
 }
 
 header div {
     text-align: center;
 }
 
+.forecast-bdr {
+    border: 2px solid var(--border);
+    border-radius: 7px;
+}
+
 .bdr {
-    border: 2px dotted red;
+    border: 2px solid var(--border);
 }
 
 .searchHist {
     margin-bottom: 5px;
     background-color: var(--searchHist);
-    color: #d3e0f3;
+    color: #87c4bf;
     text-align: center;
     border-radius: 20px;
     transition: .3s;

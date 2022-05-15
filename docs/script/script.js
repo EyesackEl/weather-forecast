@@ -20,6 +20,7 @@ function renderCurrent(currentRes) {
     var nowUv = currentRes.uvi;
     $('#dayOfUv').text('UV Index: ' + nowUv);
 
+    $('#dayOfUv').removeClass();
     if (nowUv <= 3.75) {
         $('#dayOfUv').addClass('bg-success')
     } else if (nowUv <= 7) {
@@ -36,7 +37,7 @@ function renderForecast(forecastRes, i) {
     foreWrapEl.classList.add('col');
 
     var foreCardEl = document.createElement('div');
-    foreCardEl.classList.add('foreday', 'bdr');
+    foreCardEl.classList.add('foreday', 'forecast-bdr', 'px-2');
 
     foreWrapEl.append(foreCardEl);
 
@@ -93,7 +94,6 @@ function renderSearchHist (name) {
     //Pulls array values only from what is actively rendered
     for (i = 0; i < histElArray.length; i++) {
         histElArrayTxt.push((histElArray[i]).innerText)
-        console.log(histElArrayTxt)
     }
 
     localStorage.setItem('searchHistory', JSON.stringify(histElArrayTxt));
@@ -117,7 +117,6 @@ function renderStoredSearchHist(storedHist) {
     var histElArray = Array.from(document.querySelectorAll('.searchHist'));
     if (histElArray.length >= 6 ) {
         $(histElArray[5]).remove();
-        console.log('too long')
     }
 
 }
@@ -184,10 +183,10 @@ function handleHistQuery(target) {
     getLocation(target.target.children[0].innerText)
 }
 
-
+// Runs when page is loaded to render locally saved search history if there is any
 function init() {
-    if (!localStorage.getitem('searchHistory')) {
-        var storoedHist = [];
+    if (!localStorage.getItem('searchHistory')) {
+        var storedHist = [];
     } else {
         var storedHist = JSON.parse(localStorage.getItem('searchHistory'));
     }
