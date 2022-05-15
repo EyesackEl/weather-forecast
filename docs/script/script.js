@@ -1,9 +1,9 @@
-var userInput = document.getElementById('cityName');
+var userInput = document.getElementById('cityInput');
 var cityNameEl = document.getElementById('dayOfCity');
 var foreRowEl = document.getElementById('foreRow')
 
+//Renders the day-of weather data for selected citys
 function renderCurrent(currentRes) {
-    // console.log(currentRes);
 
     var nowIcon = currentRes.weather[0].icon;
     $('#dayOfIcon').attr('src', 'http://openweathermap.org/img/wn/' + nowIcon + '.png')
@@ -29,8 +29,8 @@ function renderCurrent(currentRes) {
     }
 }
 
+// Renders each of the 5 day forecast cards
 function renderForecast(forecastRes, i) {
-    // console.log(forecastRes);
 
     var foreWrapEl = document.createElement('div');
     foreWrapEl.classList.add('col');
@@ -64,6 +64,65 @@ function renderForecast(forecastRes, i) {
 
 }
 
+//Called whenever a different city's weather is rendered, also handles local storage formatting
+function renderSearchHist (name) {
+
+    var histListEl = $('#histList');
+    
+    var histWrap = document.createElement('div');
+    histWrap.classList.add('searchHist');
+
+    var histEl = document.createElement('strong');
+    histEl.style.pointerEvents = 'none'
+    $(histEl).text(name);
+
+    histWrap.append(histEl);
+    
+    histListEl.prepend($(histWrap));
+
+    var histElArray = Array.from(document.querySelectorAll('.searchHist'));
+    //Keeps search history to 5 results or less
+    if (histElArray.length >= 6 ) {
+        $(histElArray[5]).remove();
+        console.log('too long')
+    }
+
+    //Setting the local storage to an array so I can reuse code from aboves
+    var histElArrayTxt = []
+
+    //Pulls array values only from what is actively rendered
+    for (i = 0; i < histElArray.length; i++) {
+        histElArrayTxt.push((histElArray[i]).innerText)
+        console.log(histElArrayTxt)
+    }
+
+    localStorage.setItem('searchHistory', JSON.stringify(histElArrayTxt));
+}
+
+//Called only when page loads initially to handle displaying locally stored search history
+function renderStoredSearchHist(storedHist) {
+    var histListEl = $('#histList');
+    
+    var histWrap = document.createElement('div');
+    histWrap.classList.add('searchHist');
+
+    var histEl = document.createElement('strong');
+    histEl.style.pointerEvents = 'none'
+    $(histEl).text(storedHist);
+
+    histWrap.append(histEl);
+    
+    histListEl.append($(histWrap));
+
+    var histElArray = Array.from(document.querySelectorAll('.searchHist'));
+    if (histElArray.length >= 6 ) {
+        $(histElArray[5]).remove();
+        console.log('too long')
+    }
+
+}
+
+// Uses the previously fetched longitude and latitude to fetch current and forecasted weather
 function getWeather(cityLon, cityLat) {
     var weatherQueryUrl = 'https://api.openweathermap.org/data/2.5/onecall'
     weatherQueryUrl = weatherQueryUrl + '?lat=' + cityLat + '&lon=' + cityLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=836b3a2ed43f3d15d6aeaefa85257ac2'
@@ -78,6 +137,7 @@ function getWeather(cityLon, cityLat) {
         })
         .then(function (weatherRes) {
             renderCurrent(weatherRes.current);
+            // Clears the previous forecast cards before rendering a new forecast
             $(foreRowEl).empty();
             for (var i = 1; i < 6; i++) {
                 renderForecast(weatherRes.daily[i], i);
@@ -85,6 +145,7 @@ function getWeather(cityLon, cityLat) {
         })
 }
 
+// Fetches longitude and latitude of user inputted city
 function getLocation(searchCity) {
     var geoQueryUrl = 'https://api.openweathermap.org/geo/1.0/direct'
     var geoQueryUrl = geoQueryUrl + '?q=' + searchCity + '&appid=836b3a2ed43f3d15d6aeaefa85257ac2';
@@ -99,18 +160,18 @@ function getLocation(searchCity) {
         })
         .then(function (geoRes) {
             // console.log(geoRes);
-            cityNameEl.textContent = geoRes[0].name;
-            var cityLon = geoRes[0].lon;
-            var cityLat = geoRes[0].lat;
-            getWeather(cityLon, cityLat);
-            addToHist(geoRes[0].name)
-            
+            var cityName = geoRes[0].name;
+            cityNameEl.textContent = cityName;
+            getWeather(geoRes[0].lon, geoRes[0].lat);
+            renderSearchHist(cityName);
         })
 }
 
+// Called when a user enters a new city and submits the form
 function handleSearchSubmit(event) {
     event.preventDefault();
-    var searchCity = userInput.value
+    var searchCity = userInput.value;
+    userInput.value = "";
     if (!searchCity) {
         alert("Please Enter a City Name");
         return;
@@ -118,35 +179,18 @@ function handleSearchSubmit(event) {
     getLocation(searchCity);
 }
 
+// Called when user clicks on a 
 function handleHistQuery(target) {
     getLocation(target.target.children[0].innerText)
 }
 
-function addToHist (name) {
-
-    var histListEl = $('#histList');
-    var histArray = Array.from(document.querySelectorAll('.searchHist'));
-
-    var histWrap = document.createElement('div');
-    histWrap.classList.add('searchHist');
-
-    var histEl = document.createElement('strong');
-    histEl.style.pointerEvents = 'none'
-    $(histEl).text(name);
-
-    histWrap.append(histEl);
-    
-    histListEl.prepend($(histWrap));
-
-    if (histArray.length > 3 ) {
-        $(histArray[3]).remove();
-    }
-
-
-}
 
 function init() {
-
+    var storedHist = JSON.parse(localStorage.getItem('searchHistory'))
+    for (i = 0; i < storedHist.length; i++) {
+        console.log('new hist')
+        renderStoredSearchHist(storedHist[i]);
+    }
 }
 
 init();
