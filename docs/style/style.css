@@ -1,3 +1,7 @@
+:root {
+    --searchHist: #105965;
+}
+
 body {
     cursor: default;
 }
@@ -12,9 +16,11 @@ header div {
 
 .searchHist {
     margin-bottom: 5px;
-    background-color: cyan;
+    background-color: var(--searchHist);
+    color: #d3e0f3;
     text-align: center;
     border-radius: 20px;
+    transition: .3s;
 }
 
 .searchHist:hover {

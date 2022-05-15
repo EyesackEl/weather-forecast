@@ -186,9 +186,13 @@ function handleHistQuery(target) {
 
 
 function init() {
-    var storedHist = JSON.parse(localStorage.getItem('searchHistory'))
+    if (!localStorage.getitem('searchHistory')) {
+        var storoedHist = [];
+    } else {
+        var storedHist = JSON.parse(localStorage.getItem('searchHistory'));
+    }
+
     for (i = 0; i < storedHist.length; i++) {
-        console.log('new hist')
         renderStoredSearchHist(storedHist[i]);
     }
 }
