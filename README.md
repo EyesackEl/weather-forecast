@@ -1,5 +1,5 @@
 # weather-forecast
-weather forecast app for week 6 homework
+
 ## Description
     This page is a weather fetcher that can get and display both a current and weekly weather forecast for a user-inputted city. The searches are also saved locally for a user to check their recent querys.
 
